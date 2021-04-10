@@ -1,15 +1,13 @@
-import React, { useState, useContext } from "react";
-import { Button, Alert } from "react-bootstrap";
+import React, { useState } from "react";
+import { Button } from "react-bootstrap";
 import { useAuth } from "../contexts/AuthContext";
 import { useHistory } from "react-router-dom";
 import { gql, useMutation } from '@apollo/client';
-import { SocketContext} from '../contexts/SocketProvider';
 
 export default function Logout() {
-    const {currentUsername, currentUserID, setState } = useAuth();
+    const {currentUserID, setState } = useAuth();
     const [errorHandler, setErrorHandler] = useState("");
     const history = useHistory();
-    const socket = useContext(SocketContext)
 
 
     const LOGOUT = gql `
@@ -29,7 +27,6 @@ export default function Logout() {
                 setErrorHandler(data.logout.error);
             }else{
                 setState(null, null);
-                //await socket.emit("logout", {username: currentUsername})
             }
         } catch {
                 setErrorHandler("Failed to log out");

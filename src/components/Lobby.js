@@ -1,10 +1,10 @@
 import React, { useState, useEffect, useContext } from "react";
 import '../App.css';
-import { Container, Form, Card, Row, Col, Button, InputGroup, FormControl, Alert } from "react-bootstrap";
+import { Container, Form, Card, Row, Col, Button, InputGroup, FormControl } from "react-bootstrap";
 import { useAuth } from "../contexts/AuthContext";
 import InvitationPopup from "./InvitationPopup";
 import { SocketContext} from '../contexts/SocketProvider';
-import { useHistory, useParams } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 import { selectWord } from '../helpers/hangmanHelper';
 
 
@@ -25,7 +25,10 @@ export default function Lobby() {
     // SEND AND RECIEVE INVITES
 
     async function inviteNewUser() {
+        console.log(invitedUsers)
+        console.log(inviteName)
         setInvitedUsers(invitedUsers => [...invitedUsers, inviteName]);
+        console.log(invitedUsers)
         console.log("sending invite", {
             host: currentUsername,
             members: usersInLobby,
@@ -59,12 +62,12 @@ export default function Lobby() {
         socket.on('add-to-hosts-lobby', (lobby)=>{            
             if (invitedUsers.includes(lobby.newUser)){
                 setInvitedUsers(invitedUsers => invitedUsers.filter((username)=>{
-                    return lobby.newUser != username
+                    return lobby.newUser !== username
                 }));
             }else{
                 setUsersInLobby(usersInLobby => [...usersInLobby, lobby.newUser]);
                 setInvitedUsers(invitedUsers => invitedUsers.filter((username)=>{
-                    return lobby.newUser != username
+                    return lobby.newUser !== username
                 }));
             }
         });
@@ -74,15 +77,15 @@ export default function Lobby() {
     // REMOVE FROM LOBBY
 
     useEffect(()=>{
-        socket.on('remove-from-lobby', ({userToRemove})=>{
-            console.log("YO",userToRemove,invitedUsers,invitedUsers.includes(userToRemove))
+        socket.on('remove-from-lobby', ({hostName, userToRemove, senderSocketLeaveTo})=>{
+            console.log("YO",userToRemove,invitedUsers,usersInLobby,hostName, userToRemove, senderSocketLeaveTo)
             if (invitedUsers.includes(userToRemove)){
                 setInvitedUsers(invitedUsers => invitedUsers.filter((username)=>{
-                    return userToRemove != username
+                    return userToRemove !== username
                 }));
             }else{
                 setUsersInLobby(usersInLobby => usersInLobby.filter((username)=>{
-                    return username != userToRemove
+                    return username !== userToRemove
                 }));
             }
         });
@@ -120,11 +123,11 @@ export default function Lobby() {
                 senderSocketLeaveTo:false
             });
             setUsersInLobby(usersInLobby => usersInLobby.filter((username)=>{
-                return usersInLobby[i] != username
+                return usersInLobby[i] !== username
             }));
         }else{
             setInvitedUsers(invitedUsers => invitedUsers.filter((username)=>{
-                return invitedUsers[i] != username
+                return invitedUsers[i] !== username
             }));
         }
     }
@@ -166,7 +169,7 @@ export default function Lobby() {
                         </Card>
                     </div>
                     <Form onSubmit={launchGame}>
-                        <Button disabled={usersInLobby.length == 0} variant="primary" type="submit" className="marginTop">Start Game</Button>
+                        <Button disabled={usersInLobby.length === 0} variant="primary" type="submit" className="marginTop">Start Game</Button>
                     </Form>
                 </Col>
             </Row>

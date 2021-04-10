@@ -4,7 +4,6 @@ import App from './components/App';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { ApolloProvider } from '@apollo/client/react';
 import { ApolloClient, InMemoryCache, createHttpLink  } from '@apollo/client';
-//import io from 'socket.io-client'
 
 
 const client = new ApolloClient({

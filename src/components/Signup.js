@@ -10,7 +10,7 @@ export default function Signup() {
     const usernameRef = useRef();
     const passwordRef = useRef();
     const passwordConfirmRef = useRef();
-    const {currentUsername, currentUserID, setState } = useAuth();
+    const {setState } = useAuth();
     const [errorHandler, setErrorHandler] = useState("");
     const [loading, setLoading] = useState(false);
     const history = useHistory();
@@ -41,7 +41,6 @@ export default function Signup() {
                 setErrorHandler(data.signUp.error);
             }else{
                 setState(data.signUp.username, data.signUp.id);
-                console.log(currentUsername, currentUserID)
                 history.push("/");
             }
         } catch {

@@ -1,7 +1,6 @@
 import React from 'react'
 
 const HangmanPanel = ({playerNames, playerMoves, players}) => {
-    //console.log(playerNames, playerMoves, players)
     return (
         <div>
             <h2 className="gameLogsTitle">Game Logs</h2>

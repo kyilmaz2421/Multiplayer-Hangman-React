@@ -1,9 +1,8 @@
-import React, {useRef, useState, useContext} from 'react';
-import { Form, Button, Card, Alert } from "react-bootstrap"
+import React, {useRef, useState} from 'react';
+import { Form, Button, Card, Alert } from "react-bootstrap";
 import { useAuth } from "../contexts/AuthContext";
 import { Link, useHistory } from "react-router-dom";
 import { gql, useMutation } from '@apollo/client';
-import { SocketContext} from '../contexts/SocketProvider';
 
 
 export default function Login() {
@@ -14,7 +13,6 @@ export default function Login() {
     const [errorHandler, setErrorHandler] = useState("");
     const [loading, setLoading] = useState(false);
     const history = useHistory();
-    const socket = useContext(SocketContext);
 
     const LOGIN = gql `
     mutation login($username: String!, $password: String!){
@@ -36,7 +34,6 @@ export default function Login() {
             if(data.login.error){
                 setErrorHandler(data.login.error);
             }else{
-                //await socket.emit("join", {username: data.login.username});
                 setState(data.login.username, data.login.id);
                 history.push("/")
             }

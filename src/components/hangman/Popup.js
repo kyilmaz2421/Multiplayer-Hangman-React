@@ -1,7 +1,5 @@
 import React, { useEffect } from 'react';
 import { useHistory } from "react-router-dom";
-import { Button } from "react-bootstrap";
-import { checkWin } from '../../helpers/hangmanHelper';
 
 
 const Popup = ({gameStatus, selectedWord, setPlayable}) => {
@@ -10,13 +8,11 @@ const Popup = ({gameStatus, selectedWord, setPlayable}) => {
   let finalMessageRevealWord = '';
   let playable = true;
 
-  if (gameStatus != ""){
-    if( gameStatus =="win") {
-      console.log("Win")
+  if (gameStatus !== ""){
+    if( gameStatus === "win") {
       finalMessage = 'Congratulations! You guys worked together and won! 😃';
       playable = false;
-    } else if(gameStatus == "lose"){
-      console.log("LLL")
+    } else if(gameStatus ===  "lose"){
       finalMessage = 'Unfortunately you lost. 😕';
       finalMessageRevealWord = `...the word was: ${selectedWord}`;
       playable = false;
@@ -24,6 +20,7 @@ const Popup = ({gameStatus, selectedWord, setPlayable}) => {
   }
 
   useEffect(() => {
+    //timeout to close the popup
     if (!playable){
       const timeout = setTimeout(() => {
         history.push("/")

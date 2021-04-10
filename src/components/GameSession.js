@@ -1,5 +1,4 @@
 import React, {useState, useEffect, useContext} from 'react';
-import { useHistory } from "react-router-dom";
 import '../App.css';
 import { useAuth } from "../contexts/AuthContext";
 import { SocketContext} from '../contexts/SocketProvider';
@@ -10,7 +9,7 @@ import WrongLetters from "./hangman/WrongLetters";
 import Word from "./hangman/Word";
 import Popup from "./hangman/Popup";
 import Notification from "./hangman/Notification";
-import { showNotification as show, checkWin } from '../helpers/hangmanHelper';
+import { showNotification as show} from '../helpers/hangmanHelper';
 
 
 
@@ -47,7 +46,6 @@ export default function GameSession() {
             console.log([...playerMoves, letter])
             if (selectedWord.includes(letter)) {
               if (!correctLetters.includes(letter)) {
-                // setCorrectLetters(currentLetters => [...currentLetters, letter]);
                 await socket.emit("register-move",{
                   host,
                   gameID,
@@ -55,11 +53,10 @@ export default function GameSession() {
                   wrongLetters
                 });
               } else {
-                show(setShowNotification); //letter repeat notification
+                show(setShowNotification); // letter repeat notification
               }
             } else {
               if (!wrongLetters.includes(letter)) {
-                // setWrongLetters(currentLetters => [...currentLetters, letter]);
                 await socket.emit("register-move",{
                   host,
                   gameID,
@@ -67,7 +64,7 @@ export default function GameSession() {
                   wrongLetters: [...wrongLetters, letter]
                 });
               } else {
-                show(setShowNotification); //letter repeat notifications
+                show(setShowNotification); // letter repeat notifications
               }
             }
           }
@@ -79,9 +76,10 @@ export default function GameSession() {
 
     useEffect(()=>{
         socket.on('game-update', (game)=>{
-            if (selectedWord == ""){
+            if (selectedWord === ""){
               setSelectedWord(game.word);
             }
+
             if (game.win){
               setGameStatus("win");
             } else if(game.isComplete && !game.win){

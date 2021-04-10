@@ -2,8 +2,8 @@ import React from "react";
 import "../App.css";
 import { useHistory } from "react-router-dom";
 import { useAuth } from "../contexts/AuthContext";
-import CustomNavbar from "./CustomNavbar";
-import Lobby from "./Lobby";
+import CustomNavbar from "./util/CustomNavbar";
+import Lobby from "./gameLobby/Lobby";
 
 export default function Home() {
   const { currentUsername, currentUserID, setState, data } = useAuth();

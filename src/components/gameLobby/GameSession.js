@@ -1,15 +1,15 @@
 import React, { useState, useEffect, useContext } from "react";
-import "../App.css";
-import { useAuth } from "../contexts/AuthContext";
-import { SocketContext } from "../contexts/SocketProvider";
-import HangmanPanel from "./HangmanPanel";
-import Header from "./hangman/Header";
-import Figure from "./hangman/Figure";
-import WrongLetters from "./hangman/WrongLetters";
-import Word from "./hangman/Word";
-import Popup from "./hangman/Popup";
-import Notification from "./hangman/Notification";
-import { showNotification as show } from "../helpers/hangmanHelper";
+import "../../App.css";
+import { useAuth } from "../../contexts/AuthContext";
+import { SocketContext } from "../../contexts/SocketProvider";
+import HangmanPanel from "../hangman/HangmanPanel";
+import Header from "../hangman/Header";
+import Figure from "../hangman/Figure";
+import WrongLetters from "../hangman/WrongLetters";
+import Word from "../hangman/Word";
+import Popup from "../hangman/Popup";
+import Notification from "../hangman/Notification";
+import { showNotification as show } from "../../helpers/hangmanHelper";
 
 export default function GameSession() {
   const { data } = useAuth();

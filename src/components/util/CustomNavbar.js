@@ -1,7 +1,7 @@
 import React from "react";
 import { Navbar } from "react-bootstrap";
-import { useAuth } from "../contexts/AuthContext";
-import Logout from "./Logout";
+import { useAuth } from "../../contexts/AuthContext";
+import Logout from "../authentication/Logout";
 
 export default function CustomNavbar() {
   const { currentUsername } = useAuth();

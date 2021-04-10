@@ -1,5 +1,5 @@
 import React, { useEffect, useContext } from "react";
-import { SocketContext } from "../contexts/SocketProvider";
+import { SocketContext } from "../../contexts/SocketProvider";
 import { useHistory } from "react-router-dom";
 import { Button } from "react-bootstrap";
 

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from "react";
-import "../App.css";
+import "../../App.css";
 import {
   Container,
   Form,
@@ -10,11 +10,11 @@ import {
   InputGroup,
   FormControl,
 } from "react-bootstrap";
-import { useAuth } from "../contexts/AuthContext";
-import InvitationPopup from "./InvitationPopup";
-import { SocketContext } from "../contexts/SocketProvider";
 import { useHistory } from "react-router-dom";
-import { selectWord } from "../helpers/hangmanHelper";
+import { useAuth } from "../../contexts/AuthContext";
+import { SocketContext } from "../../contexts/SocketProvider";
+import InvitationPopup from "./InvitationPopup";
+import { selectWord } from "../../helpers/hangmanHelper";
 
 export default function Lobby() {
   const { currentUsername } = useAuth();

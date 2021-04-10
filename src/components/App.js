@@ -4,10 +4,10 @@ import { Container } from "react-bootstrap";
 import { AuthProvider } from "../contexts/AuthContext";
 import { SocketProvider } from "../contexts/SocketProvider";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import Signup from "./Signup";
+import Signup from "./authentication/Signup";
 import Home from "./Home";
-import Login from "./Login";
-import GameSession from "./GameSession";
+import Login from "./authentication/Login";
+import GameSession from "./gameLobby/GameSession";
 
 function App() {
   return (
